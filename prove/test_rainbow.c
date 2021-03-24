@@ -1,16 +1,20 @@
 #include <mlx.h>
-int     render_next_frame(void *YourStruct);
+#include <stdlib.h>
+
+#define w 1080
+#define h 720
+
+static int blu = 0, red = 255, green = 0;
 
 typedef struct	s_data
 {
     void		*mlx;
-	void    	*mlx_win;
+	void    	*win;
 	void		*img;
 	char		*addr;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
-	int			color;
 }				t_data;
 
 void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
@@ -29,31 +33,64 @@ int		create_trgb(int t, int r, int g, int b)
 int put_square(t_data *img)
 {
 	int x = 0, y = 0;
-	while(y < 200)
+	while(y < h)
 	{
 		x = 0;
-		while (x < 200)
+		while (x < w)
 		{
-			my_mlx_pixel_put(img, x, y, img->color);
+			my_mlx_pixel_put(img, x, y, create_trgb(0, red, green, blu));
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img, 20, 20);
+	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
+	
+	if (blu == 0)
+		while (red > 0)
+		{
+			red--;
+			green++;
+			return (0);
+		}
+	while (green > 0)
+	{
+		green--;
+		blu++;
+		return (0);
+	}
+	while (blu > 0)
+	{
+		blu--;
+		red++;
+		return (0);
+	}
+	return (0);
+}
+
+int destroy()
+{
+	exit(0);
+	return (0);
+}
+
+int close(int keycode)
+{
+	if (keycode == 53)
+		exit(0);
+	return (0);
 }
 
 int     main(void)
 {
 	t_data	img;
-	int x = 0;
 
 	img.mlx = mlx_init();
-	img.mlx_win = mlx_new_window(img.mlx, 500, 500, "Hello world!");
-	img.img = mlx_new_image(img.mlx, 500, 500);
-	img.color = create_trgb(0, x, x, x);
+	img.win = mlx_new_window(img.mlx, w, h, "Hello world!");
+	img.img = mlx_new_image(img.mlx, w, h);
     img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
                                  &img.endian);
-	x++;
+	mlx_hook(img.win, 17, 1L<<5, destroy, &img);
+	mlx_hook(img.win, 2, 1L<<0, close, &img);
 	mlx_loop_hook(img.mlx, put_square, &img);
     mlx_loop(img.mlx);
 }
