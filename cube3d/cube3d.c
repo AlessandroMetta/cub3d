@@ -12,18 +12,16 @@ int             close(int keycode, t_vars *vars)
 {
 	if (keycode == ESC)
 	{
-	    mlx_destroy_window(vars->mlx, vars->win);
-		exit(EXIT_SUCCESS);
+	    exit(0);
 	}
+	return (0);
 }
 
-/*int             redcross(int keycode, t_vars *vars)
+int             red_cross(int keycode, t_vars *vars)
 {
-	if (vars->win && vars->mlx)
-		mlx_destroy_window(vars->mlx, vars->win);
 	exit(0);
-	return (-1);
-}*/
+	return (0);
+}
 
 int             pressed(int botton_pressed, t_vars *vars)
 {
@@ -36,6 +34,6 @@ int     main(void)
 	vars.mlx = mlx_init();
     vars.win = mlx_new_window(vars.mlx, 1080, 720, "ametta's Cube3d");
 	mlx_hook(vars.win, 2, 1L<<0, close, &vars);
-//	mlx_hook(vars.win, 17, 1L<<17, redcross, &vars);
+	mlx_hook(vars.win, 17, 1L<<5, red_cross, &vars);
     mlx_loop(vars.mlx);
 }       
