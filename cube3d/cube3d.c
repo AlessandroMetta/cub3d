@@ -1,39 +1,32 @@
-#include <mlx.h>
-#include <stdlib.h>
-#include <stdio.h>
-#define ESC 53
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cube3d.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ametta <ametta@student.42roma.it>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/25 10:55:19 by ametta            #+#    #+#             */
+/*   Updated: 2021/03/25 17:14:52 by ametta           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-typedef struct  s_vars {
-        void    *mlx;
-        void    *win;
-}               t_vars;
+#include "cube3d.h"
 
-int             close(int keycode, t_vars *vars)
+int						main(void)				// <-- Here start everithing
 {
-	if (keycode == ESC)
-	{
-	    exit(0);
-	}
-	return (0);
+	t_game	all;
+	t_key	keys;
+	all.player.posX = 22, all.player.posY = 12;		// posizione di creazione del giocatore all;interno della mappa 
+	all.player.dirX = -1, all.player.dirY = 0;		// direzione della visale del giocatore
+	all.player.planeX = 0, all.player.planeY = 0.66;	// angolo di visuale
+
+	all.mlx.ptr = mlx_init();
+    all.mlx.win = mlx_new_window(all.mlx.ptr, screenWidth, screenHeight, "ametta's Cube3d");  //creazione della finestra
+
+	mlx_hook(all.mlx.win, 2, 1L<<0, key_pressed, &keys);
+	mlx_hook(all.mlx.win, 3, 1L<<1, key_release, &keys);
+
+	mlx_hook(all.mlx.win, 17, 1L<<5, red_cross, &all.mlx);
+	mlx_loop_hook(all.mlx.ptr, ft_render, &all.mlx);
+    mlx_loop(all.mlx.ptr);
 }
-
-int             red_cross(int keycode, t_vars *vars)
-{
-	exit(0);
-	return (0);
-}
-
-int             pressed(int botton_pressed, t_vars *vars)
-{
-	printf("botton press = %d\n", botton_pressed);
-}
-
-int     main(void)
-{
-	t_vars    vars;
-	vars.mlx = mlx_init();
-    vars.win = mlx_new_window(vars.mlx, 1080, 720, "ametta's Cube3d");
-	mlx_hook(vars.win, 2, 1L<<0, close, &vars);
-	mlx_hook(vars.win, 17, 1L<<5, red_cross, &vars);
-    mlx_loop(vars.mlx);
-}       
