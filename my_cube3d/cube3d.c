@@ -6,24 +6,32 @@
 /*   By: ametta <ametta@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 10:55:19 by ametta            #+#    #+#             */
-/*   Updated: 2021/04/08 11:52:45 by ametta           ###   ########.fr       */
+/*   Updated: 2021/04/08 18:23:42 by ametta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+//#include "cube3d.h"
+#include "get_next_line/get_next_line.h"
+#include <stdio.h>
+#include <fcntl.h>
 
 void take_map()
 {
-	char	*line;
+	char	*line = 0;
 	int		file;
-	int		ret;
-	file = open(map.cub, O_RDONLY);
-	while()
+
+	file = open("map.cub", 00);
+	while(get_next_line(file, &line))
+	{
+		printf("%s\n", line);
+		free(line);
+	}
 }
 
 int						main(void)				// <-- Here start everithing
 {
 	take_map();
+	return 0;
 	/*
 	t_game	all;
 	t_key	keys;
