@@ -3,16 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ametta <ametta@student.42roma.it>          +#+  +:+       +#+        */
+/*   By: ametta <ametta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 11:13:53 by ametta            #+#    #+#             */
-/*   Updated: 2021/04/08 12:27:20 by ametta           ###   ########.fr       */
+/*   Updated: 2021/04/09 12:15:10 by ametta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+#include <stdio.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include "libutils/libutils.h"
+
+/*
 #include <mlx.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -106,5 +112,5 @@ int				key_release(int keycode, t_key *arg);
 int				red_cross(int keycode, t_game *arg);
 
 int				ft_render(t_game *arg);
-
+*/
 #endif
