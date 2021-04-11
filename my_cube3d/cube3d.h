@@ -6,7 +6,7 @@
 /*   By: ametta <ametta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 11:13:53 by ametta            #+#    #+#             */
-/*   Updated: 2021/04/09 12:15:10 by ametta           ###   ########.fr       */
+/*   Updated: 2021/04/11 18:04:15 by ametta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,41 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include "libutils/libutils.h"
+
+typedef struct	s_specs
+{
+	char		*path;
+    int			save;
+	int			width;
+	int			height;
+	char		*no_t;
+	char		*ea_t;
+	char		*we_t;	
+	char		*so_t;
+	char		*sp_t;
+	int			c_c;
+	int			f_c;
+	char		**map;
+}				t_specs;
+
+//			Utils
+int     		ft_jump_space(char **str);
+int				create_trgb(int t, int r, int g, int b);
+void    		init_struct_specs(t_specs *map);
+void    		debug_struct_specs(t_specs map);
+int 			map_moment(t_specs *map);
+int     		ft_strrstr(char *haystack, char *needle);
+
+//			file parsing
+void			take_file(t_specs *map);
+int				take_resolution(char *line, t_specs *map);
+int				take_color(char *line, t_specs *map);
+int				parsing_path(char *line, t_specs *map);
+int     		map_parsing(char *line, t_specs map);
+
+//			map parsing
+void			print_mat(char **mat);
+void			add_string_to_mat(char ***mat, char *str);
 
 /*
 #include <mlx.h>
