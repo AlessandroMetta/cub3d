@@ -1,4 +1,4 @@
-#include "cube3d.h"
+#include "cub3d.h"
 
 int ft_jump_space(char **str)
 {
@@ -12,41 +12,40 @@ int		create_trgb(int t, int r, int g, int b)
 	return(t << 24 | r << 16 | g << 8 | b);
 }
 
-void	init_struct_specs(t_specs *map)
+void	init_struct_specs(t_red *info)
 {
-	map->path = 0;
-	map->save = 0;
-	map->width = 0;
-	map->height = 0;
-	map->no_t = 0;
-	map->so_t = 0;
-	map->ea_t = 0;
-	map->we_t = 0;
-	map->sp_t = 0;
-	map->f_c = 0;
-	map->c_c = 0;
+	info->save = 0;
+	info->width = 0;
+	info->height = 0;
+	info->no_t = 0;
+	info->so_t = 0;
+	info->ea_t = 0;
+	info->we_t = 0;
+	info->sp_t = 0;
+	info->f_c = 0;
+	info->c_c = 0;
 }
 
-void	debug_struct_specs(t_specs map)
+void	debug_struct_specs(t_red info)
 {
 	printf("	--	DEBUGGING PROCESS	--\n");
-	printf("width:			%d\nheight:			%d\n", map.width, map.height);
-	printf("north textrure path:	%s\n", map.no_t);
-	printf("south textrure path:	%s\n", map.so_t);
-	printf("east textrure path:	%s\n", map.ea_t);
-	printf("west textrure path:	%s\n", map.we_t);
-	printf("sprite textrure path:	%s\n", map.sp_t);
-	printf("floor color: 		%d\n", map.f_c);
-	printf("ceiling color:		%d\n", map.c_c);
-	printf("save opt:		%d\n", map.save);
+	printf("width:			%d\nheight:			%d\n", info.width, info.height);
+	printf("north textrure path:	%s\n", info.no_t);
+	printf("south textrure path:	%s\n", info.so_t);
+	printf("east textrure path:	%s\n", info.ea_t);
+	printf("west textrure path:	%s\n", info.we_t);
+	printf("sprite textrure path:	%s\n", info.sp_t);
+	printf("floor color: 		%d\n", info.f_c);
+	printf("ceiling color:		%d\n", info.c_c);
+	printf("save opt:		%d\n", info.save);
 	printf("\n		map debug\n");
-	print_mat(map.map);
+	print_mat(info.map);
 }
 
-int 	map_moment(t_specs *map)
+int 	map_moment(t_red *info)
 {
-	if (map->width && map->height && map->no_t && map->so_t &&
-		map->ea_t && map->we_t && map->sp_t && map->f_c && map->c_c)
+	if (info->width && info->height && info->no_t && info->so_t &&
+		info->ea_t && info->we_t && info->sp_t && info->f_c && info->c_c)
 		return (1);
 	return (0);
 }
@@ -64,4 +63,17 @@ int		ft_strrstr(char *haystack, char *needle)
 			return (0);
 	}
 	return (1);
+}
+
+int ret_err(int err_code)
+{
+	if (err_code == 0)
+		return (0);
+	else if (err_code == 1)
+		printf("Error: wrong argument's number\n");
+	else if (err_code == 2)
+		printf("Error: invalid file name\n");
+	else
+		printf("Error: something goes wrong\n");
+	return (-1);
 }

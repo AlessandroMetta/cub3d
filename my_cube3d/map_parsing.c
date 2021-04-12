@@ -1,6 +1,6 @@
-#include "cube3d.h"
+#include "cub3d.h"
 
-// to remove
+// for debugging
 void	print_mat(char **mat)
 {
 	size_t i;

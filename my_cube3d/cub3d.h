@@ -1,27 +1,14 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cube3d.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ametta <ametta@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/25 11:13:53 by ametta            #+#    #+#             */
-/*   Updated: 2021/04/11 18:04:15 by ametta           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#ifndef	CUB3D_H
+#	define	CUB3D_H
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include	<stdio.h>
+#include	<fcntl.h>
+#include	<stdlib.h>
+#include	"libutils/libutils.h"
 
-#include <stdio.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include "libutils/libutils.h"
-
-typedef struct	s_specs
+typedef	struct	s_red
 {
-	char		*path;
-    int			save;
+	int			save;
 	int			width;
 	int			height;
 	char		*no_t;
@@ -32,26 +19,25 @@ typedef struct	s_specs
 	int			c_c;
 	int			f_c;
 	char		**map;
-}				t_specs;
+}				t_red;
 
 //			Utils
-int     		ft_jump_space(char **str);
+int				ft_jump_space(char **str);
 int				create_trgb(int t, int r, int g, int b);
-void    		init_struct_specs(t_specs *map);
-void    		debug_struct_specs(t_specs map);
-int 			map_moment(t_specs *map);
-int     		ft_strrstr(char *haystack, char *needle);
+void			init_struct_specs(t_red *map);
+void			debug_struct_specs(t_red map);
+int				map_moment(t_red *map);
+int				ft_strrstr(char *haystack, char *needle);
+int				ret_err(int err_code);
+void			print_mat(char **mat);
+size_t			mat_len(char **mat);
 
 //			file parsing
-void			take_file(t_specs *map);
-int				take_resolution(char *line, t_specs *map);
-int				take_color(char *line, t_specs *map);
-int				parsing_path(char *line, t_specs *map);
-int     		map_parsing(char *line, t_specs map);
-
-//			map parsing
-void			print_mat(char **mat);
-void			add_string_to_mat(char ***mat, char *str);
+int				take_resolution(char *line, t_red *map);
+int				take_color(char *line, t_red *map);
+int				parsing_path(char *line, t_red *map);
+int				map_parsing(char *line, t_red map);
+void			add_string_to_mat(char ***mat, char *str);      // map parsing
 
 /*
 #include <mlx.h>
@@ -102,37 +88,37 @@ int mapGrind[mapDim][mapDim]=
 
 typedef struct	s_mlx
 {
-        void    *ptr;
-        void    *win;
+		void    *ptr;
+		void    *win;
 }				t_mlx;
 
 typedef struct	s_player
 {
-        double	posX;
-        double	posY;
-        double	dirX;
-        double	dirY;
-        double	planeX;
-        double	planeY;
+		double	posX;
+		double	posY;
+		double	dirX;
+		double	dirY;
+		double	planeX;
+		double	planeY;
 }				t_player;
 
 typedef struct	s_data
 {
-        void	*img;
-        char	*addr;
-        int     bits_per_pixel;
-        int		line_length;
-        int		endian;
+		void	*img;
+		char	*addr;
+		int     bits_per_pixel;
+		int		line_length;
+		int		endian;
 }				t_data;
 
 typedef struct	s_key
 {
-        int		keyUp;
-        int		keyDown;
-        int		keyLeft;
-        int		keyRight;
-        int		keyRotLeft;
-        int		keyRotRight;
+		int		keyUp;
+		int		keyDown;
+		int		keyLeft;
+		int		keyRight;
+		int		keyRotLeft;
+		int		keyRotRight;
 }				t_key;
 
 typedef struct	s_game
