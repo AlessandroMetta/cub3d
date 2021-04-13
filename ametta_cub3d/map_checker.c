@@ -1,10 +1,10 @@
 #include "cub3d.h"
 
-int	just_one_player(char **map)
+static int	just_one_player(char **map)
 {
-	int x;
-	int y;
-	int pos;
+	int	x;
+	int	y;
+	int	pos;
 
 	pos = 0;
 	y = 0;
@@ -24,15 +24,15 @@ int	just_one_player(char **map)
 	if (!pos)
 	{
 		printf("Error: spawn point not found\n");
-		return(0);
+		return (0);
 	}
 	return (1);
 }
 
-int	just_right_chars(char **map)
+static int	just_right_chars(char **map)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (map[y])
@@ -42,7 +42,8 @@ int	just_right_chars(char **map)
 		{
 			if (!ft_strchr("012 NEWS", map[y][x]))
 			{
-				printf("Error: character in the map not admitted, r:%d, c:%d\n", y, x);
+				printf("Error: character in the map not admitted, ");
+				printf("r:%d, c:%d\n", y, x);
 				return (0);
 			}
 			x++;
@@ -50,16 +51,6 @@ int	just_right_chars(char **map)
 		y++;
 	}
 	return (1);
-}
-
-int	map_validator(char **map)
-{
-	int y;
-
-	y = 0;
-	if (mat_len(map) < 3)
-		return (0);
-	 
 }
 
 int	map_check(char **map)

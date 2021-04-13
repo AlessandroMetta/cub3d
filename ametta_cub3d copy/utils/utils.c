@@ -1,15 +1,15 @@
 #include "cub3d.h"
 
-int ft_jump_space(char **str)
+int	ft_jump_space(char **str)
 {
 	while (*str && ft_strchr(" \t\v\f\r", **str))
 		*str += 1;
-	return 0;
+	return (0);
 }
 
-int		create_trgb(int t, int r, int g, int b)
+int	create_trgb(int t, int r, int g, int b)
 {
-	return(t << 24 | r << 16 | g << 8 | b);
+	return (t << 24 | r << 16 | g << 8 | b);
 }
 
 void	init_struct_specs(t_red *info)
@@ -42,30 +42,7 @@ void	debug_struct_specs(t_red info)
 	print_mat(info.map);
 }
 
-int 	map_moment(t_red *info)
-{
-	if (info->width && info->height && info->no_t && info->so_t &&
-		info->ea_t && info->we_t && info->sp_t && info->f_c && info->c_c)
-		return (1);
-	return (0);
-}
-
-int		ft_strrstr(char *haystack, char *needle)
-{
-	int hlen;
-	int nlen;
-
-	hlen = ft_strlen(haystack);
-	nlen = ft_strlen(needle);
-	while (nlen > 0)
-	{
-		if(needle[--nlen] != haystack[--hlen])
-			return (0);
-	}
-	return (1);
-}
-
-int ret_err(int err_code)
+int	ret_err(int err_code)
 {
 	if (err_code == 0)
 		return (0);

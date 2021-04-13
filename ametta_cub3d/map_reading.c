@@ -1,9 +1,10 @@
 #include "cub3d.h"
 
 // for debugging
+
 void	print_mat(char **mat)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (mat[i])
@@ -15,7 +16,7 @@ void	print_mat(char **mat)
 
 size_t	mat_len(char **mat)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	if (mat)
@@ -28,7 +29,7 @@ size_t	mat_len(char **mat)
 
 void	copy_mat(char **dest, char **src)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	if (!src)
@@ -46,7 +47,7 @@ void	add_string_to_mat(char ***mat, char *str)
 	size_t	len_mat;
 
 	len_mat = mat_len(*mat);
-	temp_mat = (char **)ft_calloc(sizeof(char*), len_mat + 2);
+	temp_mat = (char **)ft_calloc(sizeof(char *), len_mat + 2);
 	copy_mat(temp_mat, *mat);
 	temp_mat[len_mat] = ft_strdup(str);
 	if (*mat)
