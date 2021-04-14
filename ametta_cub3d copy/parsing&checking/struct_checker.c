@@ -36,7 +36,7 @@ int	map_moment(t_red *info)
 int	check_info(t_red *info)
 {
 	if (map_moment(info) && map_check(info->map) && texture_check(info))
-		return (1);
-	else
 		return (0);
+	else
+		return (-1);
 }
