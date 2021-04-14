@@ -1,4 +1,6 @@
-#include "cub3d.h"
+#include "../cub3d.h"
+#define KRED  "\x1B[31m"
+#define KGRN  "\x1B[32m"
 
 int	ft_jump_space(char **str)
 {
@@ -40,17 +42,21 @@ void	debug_struct_specs(t_red info)
 	printf("save opt:		%d\n", info.save);
 	printf("\n		map debug\n");
 	print_mat(info.map);
+	printf("	--	PROCESS ENDED	--\n");
 }
 
 int	ret_err(int err_code)
 {
 	if (err_code == 0)
+	{
+		printf("%sPrecess closed correcly, Good Job!\n", KGRN);
 		return (0);
+	}
 	else if (err_code == 1)
-		printf("Error: wrong argument's number\n");
+		printf("%sError: wrong argument's number\n", KRED);
 	else if (err_code == 2)
-		printf("Error: invalid file name\n");
+		printf("%sError: invalid file name\n", KRED);
 	else
-		printf("Error: something goes wrong\n");
+		printf("%sError: something goes wrong\n", KRED);
 	return (-1);
 }

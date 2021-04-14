@@ -23,7 +23,9 @@ int	fill_info(t_red *info, char *path)
 	}
 	add_string_to_mat(&info->map, line);
 	free(line);
-	return (check_info(info));
+	debug_struct_specs(*info);
+	// return (check_info(info));
+	return (0);
 }
 
 int	main(int ac, char **av)
@@ -39,7 +41,6 @@ int	main(int ac, char **av)
 			return (ret_err(fill_info(&info, av[1])));
 		else
 			return (ret_err(2));
-		debug_struct_specs(info);
 		return (0);
 	}
 	else

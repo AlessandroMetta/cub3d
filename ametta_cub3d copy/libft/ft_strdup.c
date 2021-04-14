@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ametta <ametta@student.42roma.it>          +#+  +:+       +#+        */
+/*   By: ametta <ametta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 16:08:01 by ametta            #+#    #+#             */
-/*   Updated: 2021/04/13 11:57:21 by ametta           ###   ########.fr       */
+/*   Updated: 2021/04/14 12:54:55 by ametta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 
 char	*ft_strdup(const char *s1)
 {
-	char	*cpy;
-	size_t	cpy_len;
+	char	*duplicated;
+	size_t	lenght;
 
-	cpy_len = ft_strlen(s1);
-	cpy = (char *)ft_calloc(cpy_len + 1, sizeof(char));
-	if (!cpy)
-		return (NULL);
-	ft_strlcpy(cpy, s1, cpy_len);
-	return (cpy);
+	lenght = ft_strlen(s1) + 1;
+	duplicated = (char *)ft_calloc(lenght, sizeof(char));
+	ft_strlcpy(duplicated, s1, lenght);
+	return (duplicated);
 }

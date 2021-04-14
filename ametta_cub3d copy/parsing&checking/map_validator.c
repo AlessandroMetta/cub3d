@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../cub3d.h"
 
 static int	check_around(int i, char *prec, char *curr, char *next)
 {

@@ -1,39 +1,47 @@
-#include "cub3d.h"
-#include <unistd.h>
-#include "libft/libft.h"
+#include "../cub3d.h"
 #define BUFFER_SIZE 1
 #define MAX_OPEN 256
 
-static int	ft_reading(char **n_l, char **save, int fd)
+int	ft_rl_light(char **temp, char **rescue, char **line_red)
 {
-	int		red;
-	char	*buffer;
-	char	*temp;
-
-	red = BUFFER_SIZE;
-	while (!(*n_l = ft_strchr(save[fd], '\n')) && (red == BUFFER_SIZE))
+	*temp = ft_strjoin(*rescue, *line_red);
+	if (!*temp)
 	{
-		if (!(buffer = (char *)ft_calloc((BUFFER_SIZE + 1), sizeof(char))))
-		{
-			free(save[fd]);
-			return (-1);
-		}
-		red = read(fd, buffer, BUFFER_SIZE);
-		if (red == -1)
-		{
-			free(save[fd]);
-			free(buffer);
-			return (-1);
-		}
-		temp = ft_strjoin(save[fd], buffer);
-		free(save[fd]);
-		save[fd] = temp;
-		free(buffer);
+		free(*line_red);
+		return (-1);
 	}
 	return (0);
 }
 
-static int	ft_return(char **p_el, char **rescue)
+int	ft_read_line(char **p_el, char **rescue, int fd, int buff_size)
+{
+	char	*line_red;
+	char	*temp;
+	int		return_value;
+
+	return_value = buff_size;
+	while (!(*p_el = ft_strchr(*rescue, '\n')) && return_value == buff_size)
+	{
+		line_red = (char *)malloc(sizeof(char) * (buff_size + 1));
+		if (!line_red)
+			return (-1);
+		return_value = read(fd, line_red, buff_size);
+		if (return_value < 0)
+		{
+			free(line_red);
+			return (-1);
+		}
+		line_red[return_value] = '\0';
+		if (ft_rl_light(&temp, rescue, &line_red) == -1)
+			return (-1);
+		free(*rescue);
+		free(line_red);
+		*rescue = temp;
+	}
+	return (return_value);
+}
+
+int	ft_return(char **p_el, char **rescue)
 {
 	char *temp;
 
@@ -54,39 +62,32 @@ static int	ft_return(char **p_el, char **rescue)
 	return (0);
 }
 
-static int	ft_memleak(char **line)
+int	get_next_line(int fd, char **line)
 {
-	if (!line)
+	static char		*rescue[MAX_OPEN];
+	char			*p_el;
+
+	if (fd < 0 || fd > MAX_OPEN || !line || BUFFER_SIZE <= 0)
+		return (-1);
+	p_el = NULL;
+	if (!(rescue[fd]))
 	{
-		line = (char *)ft_calloc(sizeof(char), 1);
-		if (!line)
+		rescue[fd] = ft_strdup("");
+		if (!rescue[fd])
 			return (-1);
 	}
-	return (0);
-}
-
-int	get_next_line(const int fd, char **line)
-{
-	static char *save[MAX_OPEN];
-	char		*n_l;
-
-	if (!line || fd < 0 || BUFFER_SIZE < 1 || fd > MAX_OPEN)
-		return (-1);
-	n_l = 0;
-	if (ft_memleak(&save[fd]) == -1)
-		return (-1);
-	if (ft_reading(&n_l, save, fd) != 0)
+	if ((ft_read_line(&p_el, &rescue[fd], fd, BUFFER_SIZE)) < 0)
 	{
-		free(save[fd]);
+		free(rescue[fd]);
 		return (-1);
 	}
-	if (n_l)
-		*n_l = 0;
-	*line = ft_strdup(save[fd]);
-	if (!line)
+	if (p_el)
+		*p_el = '\0';
+	*line = ft_strdup(rescue[fd]);
+	if (!(*line))
 	{
-		free(save[fd]);
+		free(rescue[fd]);
 		return (-1);
 	}
-	return (ft_return(&n_l, &save[fd]));
+	return (ft_return(&p_el, &rescue[fd]));
 }

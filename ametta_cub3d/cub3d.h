@@ -42,6 +42,7 @@ void			add_string_to_mat(char ***mat, char *str);		// map parsing
 //			structure checker
 int				map_check(char **map);
 int				map_validator(char **map);
+int				check_info(t_red *info);
 
 /*
 #include <mlx.h>
