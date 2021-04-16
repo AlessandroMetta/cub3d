@@ -1,10 +1,24 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
-# include "libutils/libutils.h"
+# include "libft/libft.h"
+# include "minilibx/mlx.h"
+# include <math.h>
+
+# define KRED  "\x1B[31m"
+# define KGRN  "\x1B[32m"
+
+# define W_CODE 13
+# define A_CODE 0
+# define S_CODE 1
+# define D_CODE 2
+# define LA_CODE 123
+# define RA_CODE 124
+# define ESC_CODE 53
 
 typedef struct s_red
 {
@@ -21,6 +35,22 @@ typedef struct s_red
 	char		**map;
 }				t_red;
 
+typedef struct s_player
+{
+	int			pos_x;
+	int			pos_y;
+	int			dir_x;
+	int			dir_y;
+	double			plane_x;
+	double			plane_y;
+}				t_player;
+
+typedef struct s_win
+{
+	void		*ptr;
+	void		*win;
+}				t_win;
+
 //			Utils
 int				ft_jump_space(char **str);
 int				create_trgb(int t, int r, int g, int b);
@@ -31,6 +61,7 @@ int				ft_strrstr(char *haystack, char *needle);
 int				ret_err(int err_code);
 void			print_mat(char **mat);
 size_t			mat_len(char **mat);
+int				get_next_line(const int fd, char **line);
 
 //			file parsing
 int				take_resolution(char *line, t_red *map);
@@ -44,99 +75,7 @@ int				map_check(char **map);
 int				map_validator(char **map);
 int				check_info(t_red *info);
 
-/*
-#include <mlx.h>
-#include <stdlib.h>
-#include <fcntl.h>
+void			start_win(t_win *game, t_red *config);
+void			player_pos(char **map, t_player *new);
 
-#define ESC 53				// definizione tasto ESC
-
-#define W 13				// definizione tasto W
-#define A 0					// definizione tasto A
-#define S 1					// definizione tasto S
-#define D 2					// definizione tasto D
-
-#define LA 123				// definizione tasto freccia sinistra
-#define RA 124				// definizione tasto freccia destra
-
-#define mapDim 24			// definizione della dimensione della mappa
-#define screenWidth 640		// definizione della larghezza dello schermo
-#define screenHeight 480	// definizione dell'alltezza dello schermo
-
-int mapGrind[mapDim][mapDim]=
-{
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-};
-
-typedef struct	s_mlx
-{
-		void    *ptr;
-		void    *win;
-}				t_mlx;
-
-typedef struct	s_player
-{
-		double	posX;
-		double	posY;
-		double	dirX;
-		double	dirY;
-		double	planeX;
-		double	planeY;
-}				t_player;
-
-typedef struct	s_data
-{
-		void	*img;
-		char	*addr;
-		int     bits_per_pixel;
-		int		line_length;
-		int		endian;
-}				t_data;
-
-typedef struct	s_key
-{
-		int		keyUp;
-		int		keyDown;
-		int		keyLeft;
-		int		keyRight;
-		int		keyRotLeft;
-		int		keyRotRight;
-}				t_key;
-
-typedef struct	s_game
-{
-	t_player	player;
-	t_mlx		mlx;
-}				t_game;
-
-
-int				key_pressed(int keycode, t_key *arg);
-int				key_release(int keycode, t_key *arg);
-int				red_cross(int keycode, t_game *arg);
-
-int				ft_render(t_game *arg);
-*/
 #endif
