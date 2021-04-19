@@ -12,10 +12,12 @@ RM	=	rm -rf
 
 FILES	=	cub3d.c	\
 			utils/utils.c	\
-			utils/game_init.c \
 			utils/win_utils.c	\
 			utils/get_next_line.c	\
 			utils/ft_strrstr.c	\
+			utils/textures_init.c	\
+			utils/sprite_init.c	\
+			utils/player_init.c	\
 			parsing_checking/struct_checker.c	\
 			parsing_checking/map_validator.c	\
 			parsing_checking/map_filling.c	\

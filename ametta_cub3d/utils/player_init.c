@@ -1,17 +1,5 @@
 #include "../cub3d.h"
 
-static void debug_struct(t_player *new)
-{
-	printf(" -- debug process -- \n");
-	printf("print of struct player\n");
-	printf("pos_x: %d\n", new->pos_x);
-	printf("pos_y: %d\n", new->pos_y);
-	printf("dir_x: %d\n", new->dir_x);
-	printf("dir_y: %d\n", new->dir_y);
-	printf("plane_x: %f\n", new->plane_x);
-	printf("plane_y: %f\n", new->plane_y);
-}
-
 static void	spawndir_init(t_player *new, char pos)
 {
 	new->dir_x = 0;
@@ -53,8 +41,8 @@ void	player_pos(char **map, t_player *new)
 		{
 			if (ft_strchr("NEWS", map[y][x]))
 			{
-				new->pos_x = x;
-				new->pos_y = y;
+				new->pos_x = x + 0.5;
+				new->pos_y = y + 0.5;
 				spawndir_init(new, map[y][x]);
 				return ;
 			}

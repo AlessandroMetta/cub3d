@@ -27,8 +27,8 @@ static int	texture_check(t_red *config)
 
 int	map_moment(t_red *config)
 {
-	if (config->width && config->height && config->no_t && config->so_t 
-		&& config->ea_t	&& config->we_t && config->sp_t && config->f_c 
+	if (config->width && config->height && config->no_t && config->so_t
+		&& config->ea_t && config->we_t && config->sp_t && config->f_c
 		&& config->c_c)
 		return (1);
 	return (0);

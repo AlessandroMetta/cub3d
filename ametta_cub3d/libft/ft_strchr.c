@@ -6,7 +6,7 @@
 /*   By: ametta <ametta@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 15:49:36 by ametta            #+#    #+#             */
-/*   Updated: 2021/04/13 11:41:44 by ametta           ###   ########.fr       */
+/*   Updated: 2021/04/19 12:19:54 by ametta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strchr(const char *s, int c)
 	}
 	if (s[i] == c)
 	{
-		return ((char*)s + i);
+		return ((char *)s + i);
 	}
 	return (NULL);
 }

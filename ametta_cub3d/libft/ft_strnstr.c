@@ -6,7 +6,7 @@
 /*   By: ametta <ametta@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 14:12:32 by ametta            #+#    #+#             */
-/*   Updated: 2021/04/13 11:48:07 by ametta           ###   ########.fr       */
+/*   Updated: 2021/04/19 12:20:24 by ametta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 		}
 	}
 	if (needle[j] == '\0')
-		return ((char*)haystack + (i - j));
+		return ((char *)haystack + (i - j));
 	return (NULL);
 }

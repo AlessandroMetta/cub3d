@@ -19,12 +19,14 @@ int ft_esc(int keycode)
 
 void ft_gameplay(t_red *config)
 {
-	// t_win game;
-	t_player new;
+	t_win 		game;
+	// t_player	p1;
+	t_tex		textures;
 
-	player_pos(config->map, &new);
-	/*
 	start_win(&game, config);
+	// player_pos(config->map, &p1);
+	texture_init(game, config, &textures);
+	/*
 	mlx_hook(game.win, 17, 1L<<5, ft_redcross, &game);
 	mlx_hook(game.win, 2, 1L<<0, ft_esc, &game);
     mlx_loop(game.ptr);
