@@ -20,7 +20,7 @@
 # define RA_CODE 124
 # define ESC_CODE 53
 
-typedef struct	s_img
+typedef struct s_img
 {
 	void		*img;
 	char		*addr;
@@ -31,7 +31,7 @@ typedef struct	s_img
 	int			h;
 }				t_img;
 
-typedef struct	s_tex
+typedef struct s_tex
 {
 	t_img		*no;
 	t_img		*we;
@@ -40,10 +40,11 @@ typedef struct	s_tex
 	t_img		*sp;
 }				t_tex;
 
-typedef struct	s_sprite
+typedef struct s_sprite
 {
-	double		x;
-	double		y;
+	double			x;
+	double			y;
+	struct s_sprite	*next;
 }				t_sprite;
 
 typedef struct s_red
@@ -104,5 +105,9 @@ int				check_info(t_red *config);
 void			start_win(t_win *game, t_red *config);
 void			player_pos(char **map, t_player *new);
 void			texture_init(t_win win, t_red *config, t_tex *textures);
+t_sprite		*sprite_init(char **map);
+
+int				ft_redcross(void);
+int				ft_esc(int keycode);
 
 #endif

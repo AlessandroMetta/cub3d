@@ -48,6 +48,8 @@ void	add_string_to_mat(char ***mat, char *str)
 
 	len_mat = mat_len(*mat);
 	temp_mat = (char **)ft_calloc(sizeof(char *), len_mat + 2);
+	if (!temp_mat)
+		printf("%sError: Memory Allocation Failed\n", KRED);
 	copy_mat(temp_mat, *mat);
 	temp_mat[len_mat] = ft_strdup(str);
 	if (*mat)
