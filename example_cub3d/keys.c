@@ -38,17 +38,17 @@ int		ft_keys(t_vars *vars)
     if(vars->keyUp == 1)//w
     {
       //printf("flag\n");
-      if(worldMap[(int)(vars->posX + vars->dirX * vars->moveSpeed)][(int)(vars->posY)] == 0)
+      if(ft_strchr("0NWES", map[(int)(vars->posX + vars->dirX * vars->moveSpeed)][(int)(vars->posY)]))
         {vars->posX = vars->posX + vars->dirX * vars->moveSpeed;}
         //printf("%d",(int)(vars->posX));
-      if(worldMap[(int)(vars->posX)][(int)(vars->posY + vars->dirY * vars->moveSpeed)] == 0)
+      if(ft_strchr("0NWES", map[(int)(vars->posX)][(int)(vars->posY + vars->dirY * vars->moveSpeed)]))
         {vars->posY = vars->posY + vars->dirY * vars->moveSpeed;}
     }
     if(vars->keyDown == 1)//rightarr View
     {
-      if(worldMap[(int)(vars->posX - vars->dirX * vars->moveSpeed)][(int)(vars->posY)] == 0)
+      if(ft_strchr("0NWES", map[(int)(vars->posX - vars->dirX * vars->moveSpeed)][(int)(vars->posY)]))
         {vars->posX -= vars->dirX * vars->moveSpeed;}
-      if(worldMap[(int)(vars->posX)][(int)(vars->posY - vars->dirY * vars->moveSpeed)] == 0)
+      if(ft_strchr("0NWES", map[(int)(vars->posX)][(int)(vars->posY - vars->dirY * vars->moveSpeed)]))
         {vars->posY -= vars->dirY * vars->moveSpeed;}
     }
     if(vars->keyLeftView == 1)//leftarr view
@@ -77,17 +77,17 @@ int		ft_keys(t_vars *vars)
   
     if(vars->keyLeft == 1)
     {
-      if(worldMap[(int)(vars->posX + vars->planeX * vars->moveSpeed)][(int)(vars->posY)] == 0)
+      if(ft_strchr("0NWES", map[(int)(vars->posX + vars->planeX * vars->moveSpeed)][(int)(vars->posY)]))
         {vars->posX = vars->posX + vars->planeX * vars->moveSpeed;}
         //printf("%d",(int)(vars->posX));
-      if(worldMap[(int)(vars->posX)][(int)(vars->posY + vars->planeY * vars->moveSpeed)] == 0)
+      if(ft_strchr("0NWES", map[(int)(vars->posX)][(int)(vars->posY + vars->planeY * vars->moveSpeed)]))
         {vars->posY = vars->posY + vars->planeY * vars->moveSpeed;}
     }
     if(vars->keyRight == 1)
     {
-      if(worldMap[(int)(vars->posX - vars->planeX * vars->moveSpeed)][(int)(vars->posY)] == 0)
+      if(ft_strchr("0NWES", map[(int)(vars->posX - vars->planeX * vars->moveSpeed)][(int)(vars->posY)]))
         {vars->posX -= vars->planeX * vars->moveSpeed;}
-      if(worldMap[(int)(vars->posX)][(int)(vars->posY - vars->planeY * vars->moveSpeed)] == 0)
+      if(ft_strchr("0NWES", map[(int)(vars->posX)][(int)(vars->posY - vars->planeY * vars->moveSpeed)]))
         {vars->posY -= vars->planeY * vars->moveSpeed;}
     }
 	return 0 ;

@@ -101,5 +101,6 @@ int		key_hook(int keycode, t_vars *vars);
 int		ft_keys(t_vars *vars);
 void	ft_drawline(t_data img, t_vars *vars);
 int		render_next_frame(t_vars *vars);
+char	*ft_strchr(const char *s, int c);
 
 #endif

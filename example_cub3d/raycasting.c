@@ -32,7 +32,6 @@ void ft_drawline(t_data img, t_vars *vars)
     //printf("%d: %d : %d\n", a, vars->x, b);
 }
 
-
 int	render_next_frame(t_vars *vars)
 {
     int w = screenWidth;
@@ -40,7 +39,6 @@ int	render_next_frame(t_vars *vars)
     //int w = 0;
     //int h = 0;
     t_data	img;
-
 
     vars->x = 0;
     img.img = mlx_new_image(vars->mlx, screenWidth, screenHeight); //start image
@@ -102,7 +100,7 @@ int	render_next_frame(t_vars *vars)
           vars->side = 1;
         }
         //Check if ray has vars.hit a wall
-        if(worldMap[vars->mapX][vars->mapY] > 0) vars->hit = 1;
+        if(map[vars->mapX][vars->mapY] == '1') vars->hit = 1;
       }
       //Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
       if(vars->side == 0)

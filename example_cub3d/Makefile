@@ -4,6 +4,7 @@ SRCS		= 	main.c \
 				raycasting.c \
 				utils.c \
 				keys.c \
+				ft_strchr.c \
 
 OBJS			= ${SRCS:.c=.o}
 

@@ -30,7 +30,7 @@ void dda(t_rc *val)
 			val->mapY += val->stepY;
 			val->side = 1;
 		}
-		if (map[val->mapX][val->mapY] == '1')
+		if (map[val->mapX][val->mapY] == '1' || map[val->mapX][val->mapY] != 'N')
 			hit = 1;
 	}
 }
