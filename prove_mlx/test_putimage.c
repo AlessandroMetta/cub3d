@@ -27,7 +27,7 @@ int main(void)
 
 	int		img_width = 640;
 	int		img_height = 426;
-	char path
+	char path;
 	mlx.img.bpp = 32;
 	mlx.img.size_l = 3200;
 
