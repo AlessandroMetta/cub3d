@@ -14,24 +14,21 @@
 void	ft_display(void *mlx_ptr);
 void	cub3d(void);
 
+typedef struct  s_spt {
+    double      posX;
+    double      posY;
+    struct s_spt *next;
+}               t_spt;
+
 typedef struct  s_data {
     void        *img;
     char        *addr;
-    int         bits_per_pixel;
-    int         line_length;
-    int         endian;
-    int         h;
-    int         w;
+    int         bbp;
+    int         ll;
+    int         end;
+    int         wdh;
+    int         hgh;
 }               t_data;
-
-typedef struct s_tex
-{
-	t_data	*no;
-	t_data	*we;
-	t_data	*ea;
-	t_data	*so;
-	t_data	*sp;
-}				t_tex;
 
 typedef struct s_keys{
   int  keyUp;
@@ -80,10 +77,6 @@ typedef struct  s_vars {
 
     double      oldDirX;
     double      oldPlaneX;
-
-    double wallX;
-    double texX;
-    
     //keys
     int  keyUp;
     int  keyDown;
@@ -92,7 +85,11 @@ typedef struct  s_vars {
     int  keyLeft;
     int  keyRight;
     
-    t_tex		tex;
+    t_data *texN;
+    t_data *texS;
+    t_data *texE;
+    t_data *texW;
+
 }               t_vars;
 
 int		key_hook(int keycode, t_vars *vars);
@@ -101,12 +98,11 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		ft_exit(int keycode, t_vars *vars);
 int		ft_release(int keycode, t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
-int		ft_keys(t_vars *vars);
-void	ft_drawline(t_data img, t_vars *vars, int vsop);
+void		ft_keys(t_vars *vars);
 int		render_next_frame(t_vars *vars);
 char	*ft_strchr(const char *s, int c);
 int   create_trgb(int t, int r, int g, int b);
-void  ft_drawline(t_data img, t_vars *vars, int vsop);
-void ft_drawtex(t_data img, t_vars *vars, int vsop);
+void drawTexture(t_data img, t_vars *vars, int vsop, int drawStart, int drawEnd);
+void drawEnviroment(t_data img, t_vars *vars, int vsop, int drawStart, int drawEnd);
 
 #endif

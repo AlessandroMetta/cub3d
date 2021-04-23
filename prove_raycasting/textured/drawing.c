@@ -1,69 +1,79 @@
 #include "lib.h"
 
-void textureSetting(t_vars *vars, char **addr, int *width, int *height)
+static void textureSet(t_vars *vars, char **addr, int *width, int *height)
 {
-	if (vars->side == 1 && vars->rayDirX < 0)
+	if (vars->side == 0 && vars->rayDirX < 0)
 	{
-		*addr = vars->tex.we->addr;
-		*width = vars->tex.we->w;
-		*height= vars->tex.we->h;
+		*addr = vars->texN->addr;
+		*width = vars->texN->wdh;
+		*height = vars->texN->hgh;
 	}
-	else if (vars->side == 1 && vars->rayDirX > 0)
+	else if (vars->side == 0 && vars->rayDirX > 0)
 	{
-		*addr = vars->tex.we->addr;
-		*width = vars->tex.we->w;
-		*height= vars->tex.we->h;
+		*addr = vars->texS->addr;
+		*width = vars->texS->wdh;
+		*height = vars->texS->hgh;
 	}
-	else if (vars->side == 0 && vars->rayDirY < 0)
+	else if (vars->side == 1 && vars->rayDirY > 0)
 	{
-		*addr = vars->tex.we->addr;
-		*width = vars->tex.we->w;
-		*height= vars->tex.we->h;
+		*addr = vars->texE->addr;
+		*width = vars->texE->wdh;
+		*height = vars->texE->hgh;
 	}
-	else if (vars->side == 0 && vars->rayDirY > 0)
+	else if (vars->side == 1 && vars->rayDirY < 0)
 	{
-		*addr = vars->tex.we->addr;
-		*width = vars->tex.we->w;
-		*height= vars->tex.we->h;
+		*addr = vars->texW->addr;
+		*width = vars->texW->wdh;
+		*height = vars->texW->hgh; 
 	}
 }
 
-void ft_drawtex(t_data img, t_vars *vars, int vsop)
-{	
-	int drawStart = -vars->lineHeight / 2 + screenHeight / 2;
-	if(drawStart < 0)
-		drawStart = 0;
-	int drawEnd = vars->lineHeight / 2 + screenHeight / 2;
-	if(drawEnd >= screenHeight)
-		drawEnd = screenHeight - 1;
-	int osop = 0;
-	char *addr;
-	int width;
-	int height;
-	textureSetting(vars, &addr, &width, &height);
+static void drawPixelsSet(t_vars *vars, double *wallX, int *texX, int wdh)
+{
 	if (vars->side == 0)
-		vars->wallX = vars->posY + vars->perpWallDist * vars->rayDirY;
+		*wallX = vars->posY + vars->perpWallDist * vars->rayDirY;
 	else
-		vars->wallX = vars->posX + vars->perpWallDist * vars->rayDirX;
-	vars->wallX -= floor(vars->wallX);
-	int texX = (int)(vars->wallX * (double)width);
+		*wallX = vars->posX + vars->perpWallDist * vars->rayDirX;
+	*wallX -= floor(*wallX);
+
+	*texX = (int)(*wallX * ((double)wdh));
 	if (vars->side == 0 && vars->rayDirX > 0)
-		texX = width - texX - 1;
-	if (vars->side == 1 && vars->rayDirX < 0)
-		texX = width - texX - 1;
-	double step = (drawStart - screenHeight / 2 + vars->lineHeight / 2) * (1.0 * height / vars->lineHeight);
-	
-	while(osop <= screenHeight)
+		*texX = wdh - *texX - 1;
+	if (vars->side == 1 && vars->rayDirY < 0)
+		*texX = wdh - *texX - 1;
+}
+
+void drawTexture(t_data img, t_vars *vars, int vsop, int drawStart, int drawEnd)
+{	
+	int width, height;
+	int texX;
+	double step, wallX;
+	char *addr;
+
+	textureSet(vars, &addr, &width, &height);
+	drawPixelsSet(vars, &wallX, &texX, width);
+
+	step = (drawStart - screenHeight / 2 + vars->lineHeight / 2) * (1.0 * height / vars->lineHeight);
+
+	while (drawStart <= drawEnd)
 	{
-		if (osop <= drawStart)
-			my_mlx_pixel_put(&img, vsop, osop, create_trgb(0, 0, 200, 200));
-		if (drawStart < drawEnd)
-		{
-			step += (1.0 * height / vars->lineHeight);
-			my_mlx_pixel_put(img.img, vsop, drawStart, ((int *)addr)[height * ((int)step & (height - 1)) + texX]);
-		}
-		if (osop < screenHeight  && osop >= drawEnd)
-			my_mlx_pixel_put(&img, vsop, osop, create_trgb(0, 10, 100, 0));
-		osop++;
+		step += (1.0 * height / vars->lineHeight);
+		my_mlx_pixel_put(&img, vsop, drawStart, ((int *)addr)[height * ((int)step & (height - 1)) + texX]); /* wall one unit print */
+		drawStart++;
+	}
+}
+
+void drawEnviroment(t_data img, t_vars *vars, int vsop, int drawStart, int drawEnd)
+{
+	int pixel;
+	
+	pixel = 0;
+	while (pixel < screenHeight)
+	{
+		if (pixel < drawStart)
+			my_mlx_pixel_put(&img, vsop, pixel, create_trgb(0, 0, 200, 200));
+		if (pixel < screenHeight  && pixel >= drawEnd)
+			my_mlx_pixel_put(&img, vsop, pixel, create_trgb(0, 10, 100, 0));
+		pixel++;
 	}
 }
