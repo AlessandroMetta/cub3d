@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ametta <ametta@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ametta <ametta@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:17:11 by ametta            #+#    #+#             */
-/*   Updated: 2021/04/20 11:11:35 by ametta           ###   ########.fr       */
+/*   Updated: 2021/04/26 14:47:29 by ametta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define LIBFT_H
 
 # include <stddef.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 typedef struct s_list
 {
@@ -21,6 +23,9 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
+void				*ft_realloc(void *ptr, size_t size);
+char				*ft_strcpy(char *dst, char *src);
+int					ft_strcmp(const char *s1, const char *s2);
 void				*ft_calloc(size_t nitems, size_t size);
 char				*ft_strchr(const char *s, int c);
 void				*ft_memset(void *b, int c, size_t len);

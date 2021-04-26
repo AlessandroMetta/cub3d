@@ -6,12 +6,11 @@
 /*   By: ametta <ametta@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 11:52:24 by ametta            #+#    #+#             */
-/*   Updated: 2021/04/13 11:53:18 by ametta           ###   ########.fr       */
+/*   Updated: 2021/04/26 14:47:14 by ametta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 static int	ft_count_word(const char *s, char c)
 {

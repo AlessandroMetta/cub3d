@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ametta <ametta@student.42.fr>              +#+  +:+       +#+         #
+#    By: ametta <ametta@student.42roma.it>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/26 16:15:19 by ametta            #+#    #+#              #
-#    Updated: 2021/04/20 11:11:53 by ametta           ###   ########.fr        #
+#    Updated: 2021/04/26 14:45:51 by ametta           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,9 @@ AR	= 	ar rc
 RM	=	rm -rf
 
 FILES	=	ft_atoi.c	\
+		ft_strcmp.c		\
+		ft_realloc.c		\
+		ft_strcpy.c		\
 		ft_isprint.c	\
 		ft_memset.c	\
 		ft_strjoin.c	\

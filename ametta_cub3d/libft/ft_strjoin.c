@@ -6,12 +6,11 @@
 /*   By: ametta <ametta@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 10:52:08 by ametta            #+#    #+#             */
-/*   Updated: 2021/04/16 11:25:37 by ametta           ###   ########.fr       */
+/*   Updated: 2021/04/26 14:46:53 by ametta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

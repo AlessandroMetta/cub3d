@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ametta <ametta@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/14 16:08:01 by ametta            #+#    #+#             */
-/*   Updated: 2021/04/26 14:46:55 by ametta           ###   ########.fr       */
+/*   Created: 2021/04/26 14:28:54 by ametta            #+#    #+#             */
+/*   Updated: 2021/04/26 14:28:57 by ametta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-char	*ft_strdup(const char *s1)
-{
-	char	*duplicated;
-	size_t	lenght;
+# include <fcntl.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include "../libft/libft.h"
 
-	lenght = ft_strlen(s1) + 1;
-	duplicated = (char *)ft_calloc(lenght, sizeof(char));
-	ft_strlcpy(duplicated, s1, lenght);
-	return (duplicated);
-}
+# define MAX_F 4096
+# define BUFFER_SIZE 50
+
+int			get_next_line(int fd, char **line);
+
+#endif

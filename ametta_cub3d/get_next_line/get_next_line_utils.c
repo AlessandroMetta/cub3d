@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ametta <ametta@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/14 16:08:01 by ametta            #+#    #+#             */
-/*   Updated: 2021/04/26 14:46:55 by ametta           ###   ########.fr       */
+/*   Created: 2021/04/26 14:28:39 by ametta            #+#    #+#             */
+/*   Updated: 2021/04/26 14:28:43 by ametta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "get_next_line.h"
 
-char	*ft_strdup(const char *s1)
+void	*ft_realloc_gnl(void *ptr, ssize_t more_size)
 {
-	char	*duplicated;
-	size_t	lenght;
+	void	*ret;
 
-	lenght = ft_strlen(s1) + 1;
-	duplicated = (char *)ft_calloc(lenght, sizeof(char));
-	ft_strlcpy(duplicated, s1, lenght);
-	return (duplicated);
+	ret = malloc((ft_strlen(ptr) + more_size) * sizeof(char));
+	if (!(ret))
+		return (0);
+	ret = ft_strcpy(ret, ptr);
+	free(ptr);
+	ptr = NULL;
+	return (ret);
 }

@@ -6,12 +6,11 @@
 /*   By: ametta <ametta@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 11:06:17 by ametta            #+#    #+#             */
-/*   Updated: 2021/04/13 11:36:20 by ametta           ###   ########.fr       */
+/*   Updated: 2021/04/26 14:47:46 by ametta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 static int	ft_digit(int n)
 {

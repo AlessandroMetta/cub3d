@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ametta <ametta@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/14 16:08:01 by ametta            #+#    #+#             */
-/*   Updated: 2021/04/26 14:46:55 by ametta           ###   ########.fr       */
+/*   Created: 2021/02/08 16:22:55 by kpersich          #+#    #+#             */
+/*   Updated: 2021/04/26 14:42:59 by ametta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-char	*ft_strdup(const char *s1)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	char	*duplicated;
-	size_t	lenght;
+	int	i;
 
-	lenght = ft_strlen(s1) + 1;
-	duplicated = (char *)ft_calloc(lenght, sizeof(char));
-	ft_strlcpy(duplicated, s1, lenght);
-	return (duplicated);
+	i = 0;
+	while (s1[i] || s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (0);
+		i++;
+	}
+	return (1);
 }

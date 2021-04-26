@@ -6,12 +6,11 @@
 /*   By: ametta <ametta@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 10:21:48 by ametta            #+#    #+#             */
-/*   Updated: 2021/04/13 11:46:46 by ametta           ###   ########.fr       */
+/*   Updated: 2021/04/26 14:47:00 by ametta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {

@@ -6,12 +6,11 @@
 /*   By: ametta <ametta@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 10:17:58 by ametta            #+#    #+#             */
-/*   Updated: 2021/04/13 11:41:18 by ametta           ###   ########.fr       */
+/*   Updated: 2021/04/26 14:47:08 by ametta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
