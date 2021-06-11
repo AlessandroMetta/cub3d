@@ -7,4 +7,5 @@ inside "/usr/local/include", you have to include the mlx.h (the library of the M
 inside "/usr/local/lib", you have to include the libmlx.a (all the function of MinilibX)
 
 In accordance with Norm v3
+
 Graded 101%
